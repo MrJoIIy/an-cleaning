@@ -154,6 +154,32 @@ footer a{color:var(--teal);text-decoration:none}
   .callbar .btn{flex:1;padding:14px}
   footer{padding-bottom:110px}
 }
+
+/* ---- before/after slider ---- */
+.ba-slider{--pos:50%;position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
+  border-radius:16px;background:#07282f;touch-action:pan-y;user-select:none;-webkit-user-select:none;
+  box-shadow:0 18px 40px -26px rgba(7,40,47,.55);cursor:ew-resize}
+.ba-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  pointer-events:none}
+.ba-slider .ba-before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.ba-slider .ba-divider{position:absolute;top:0;bottom:0;left:var(--pos);width:3px;margin-left:-1.5px;
+  background:#23c7b4;pointer-events:none;z-index:3;box-shadow:0 0 12px rgba(35,199,180,.55)}
+.ba-slider .ba-handle{position:absolute;top:50%;left:var(--pos);width:46px;height:46px;margin:-23px 0 0 -23px;
+  border-radius:50%;background:#23c7b4;border:3px solid #f6f2e9;box-shadow:0 3px 14px rgba(7,40,47,.5);
+  display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:4;box-sizing:border-box}
+.ba-slider .ba-chip{position:absolute;bottom:14px;z-index:5;font:700 11px/1 -apple-system,
+  BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;letter-spacing:.11em;text-transform:uppercase;
+  color:#fff;background:rgba(7,40,47,.78);padding:7px 11px;border-radius:7px;pointer-events:none}
+.ba-slider .ba-chip-before{left:14px}
+.ba-slider .ba-chip-after{right:14px}
+.ba-slider .ba-range{position:absolute;left:0;bottom:0;width:100%;height:100%;margin:0;padding:0;
+  opacity:0;appearance:none;-webkit-appearance:none;background:none;pointer-events:none;z-index:6}
+.ba-slider .ba-range:focus-visible ~ .ba-handle{outline:3px solid #f6f2e9;outline-offset:3px}
+.ba-slider .ba-range::-webkit-slider-thumb{-webkit-appearance:none;width:46px;height:46px}
+.ba-slider .ba-range::-moz-range-thumb{width:46px;height:46px;border:0}
+@media (max-width:560px){.ba-slider .ba-chip{font-size:10px;padding:6px 9px;bottom:10px}
+  .ba-slider .ba-chip-before{left:10px}.ba-slider .ba-chip-after{right:10px}
+  .ba-slider .ba-handle{width:40px;height:40px;margin:-20px 0 0 -20px}}
 </style>
 </head>
 <body>
@@ -344,13 +370,62 @@ footer a{color:var(--teal);text-decoration:none}
   </div>
 </section>
 
+<!-- ============ BEFORE / AFTER ============ -->
+<section style="background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">What changes</p>
+      <h2>Drag it and look</h2>
+      <p>Illustration, not a customer's bin &mdash; but this is the difference between a bin that has
+        sat in the Texas sun and one that has been washed. Real job photos replace these as they
+        come in.</p>
+    </div>
+
+    <div style="display:grid;gap:26px">
+      <div class="ba-slider">
+  <img class="ba-after" src="img/bin-after.jpg" alt="Illustration of a clean trash bin" width="1280" height="720" loading="lazy" decoding="async">
+  <img class="ba-before" src="img/bin-before.jpg" alt="Illustration of a dirty trash bin" width="1280" height="720" loading="lazy" decoding="async">
+  <div class="ba-divider"></div>
+  <div class="ba-handle" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+      <path d="M8 5 L3 12 L8 19" fill="none" stroke="#07282f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 5 L21 12 L16 19" fill="none" stroke="#07282f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="ba-chip ba-chip-before">Before</span>
+  <span class="ba-chip ba-chip-after">After</span>
+  <input class="ba-range" type="range" min="0" max="100" value="50"
+         aria-label="Trash bin before and after" aria-valuetext="50% before shown">
+</div>
+      <div class="ba-slider">
+  <img class="ba-after" src="img/driveway-after.jpg" alt="Illustration of a clean driveway" width="1280" height="720" loading="lazy" decoding="async">
+  <img class="ba-before" src="img/driveway-before.jpg" alt="Illustration of a grimy driveway" width="1280" height="720" loading="lazy" decoding="async">
+  <div class="ba-divider"></div>
+  <div class="ba-handle" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+      <path d="M8 5 L3 12 L8 19" fill="none" stroke="#07282f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 5 L21 12 L16 19" fill="none" stroke="#07282f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="ba-chip ba-chip-before">Before</span>
+  <span class="ba-chip ba-chip-after">After</span>
+  <input class="ba-range" type="range" min="0" max="100" value="50"
+         aria-label="Driveway before and after" aria-valuetext="50% before shown">
+</div>
+    </div>
+    <p style="color:var(--muted);font-size:13.5px;margin:16px 0 0">
+      Drag the handle, or focus it and use the arrow keys.
+    </p>
+  </div>
+</section>
+
 <!-- ============ PHOTOS / TRUST ============ -->
 <section>
   <div class="wrap split">
     <div class="panel">
       <h3>Photos of real jobs</h3>
       <p>We're adding photos of finished bins and driveways here as the jobs stack up — we
-        won't pad this page with stock pictures.</p>
+        won't pad this page with stock pictures, and the graphic above is labelled an illustration, not a job photo.</p>
       <p>Want proof before you book? Ask and we'll send you pictures of past work directly.</p>
       <div style="margin-top:20px">
         <a class="btn btn-ghost" href="sms:+18053403201">Text us for photos</a>
@@ -430,5 +505,45 @@ footer a{color:var(--teal);text-decoration:none}
   <a class="btn btn-ghost" href="sms:+18053403201">Text</a>
 </div>
 
+<script>
+(function () {
+  var sliders = document.querySelectorAll('.ba-slider');
+  Array.prototype.forEach.call(sliders, function (slider) {
+    var range = slider.querySelector('.ba-range');
+    if (!range) return;
+    var dragging = false;
+
+    var update = function (value) {
+      var v = Math.max(0, Math.min(100, Number(value) || 0));
+      slider.style.setProperty('--pos', v + '%');
+      range.setAttribute('aria-valuetext', Math.round(v) + '% before shown');
+    };
+
+    var fromEvent = function (e) {
+      var rect = slider.getBoundingClientRect();
+      if (!rect.width) return;
+      var v = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      range.value = String(Math.round(v));
+      update(range.value);
+    };
+
+    range.addEventListener('input', function () { update(range.value); });
+    slider.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      try { slider.setPointerCapture(e.pointerId); } catch (err) {}
+      fromEvent(e);
+    });
+    slider.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+    var end = function (e) {
+      dragging = false;
+      try { slider.releasePointerCapture(e.pointerId); } catch (err) {}
+    };
+    slider.addEventListener('pointerup', end);
+    slider.addEventListener('pointercancel', end);
+    slider.addEventListener('pointerleave', function () { dragging = false; });
+    update(range.value);
+  });
+})();
+</script>
 </body>
 </html>
